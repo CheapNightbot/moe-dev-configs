@@ -23,6 +23,7 @@ Also make sure to create `node_modules` and `.venv` directoies on the host befor
 
 > No modules / packages will be saved inside these folders on the host. But they need to exist on the host.
 
-- For **deno**, create `node_modules` at the root of the project folder on the host.
+- For **deno** and **node**, create `node_modules` at the root of the project folder on the host.
 - For **python-uv**, create `.venv` at the root of the project folder on the host.
 - For **monorepo-uv-pnpm**, create `node_modules` inside the "frontend" directory & `.venv` inside the "backend" directory.
+
