@@ -1,0 +1,8 @@
+{
+    "id": "node",
+    "version": "1.0.0",
+    "name": "Node.js Development Environment",
+    "description": "A secure Node.js container with non-root user and isolated filesystem.",
+    "publisher": "ポテト ^. .^₎ฅ",
+    "licenseURL": "https://github.com/CheapNightbot/moe-dev-configs/blob/main/LICENSE"
+}

@@ -1,0 +1,28 @@
+{
+    "name": "Node.js (pnpm)",
+    "dockerComposeFile": "compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "moe",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "dev.containers.dockerCredentialHelper": false,
+                "dev.containers.copyGitConfig": false,
+                "remote.containers.defaultAgentForwarding": false,
+                "remote.SSH.forwardAgent": false
+            },
+            "extensions": [
+                "astro-build.astro-vscode",
+                "bradlc.vscode-tailwindcss"
+            ]
+        }
+    },
+    "remoteEnv": {
+        "SSH_AUTH_SOCK": "",
+        "GPG_AGENT_INFO": "",
+        "BROWSER": ""
+    },
+    "postCreateCommand": "pnpm config set store-dir ${PNPM_HOME}/store"
+}
