@@ -1,5 +1,5 @@
 {
-    "name": "Monorepo (uv + pnpm)",
+    "name": "Deno",
     "dockerComposeFile": "compose.yml",
     "service": "app",
     "workspaceFolder": "/workspace",
