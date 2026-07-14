@@ -12,7 +12,7 @@ services:
       # Mount project code
       - ..:/workspace:cached,z
       # Overlay a named volume on `node_modules` to prevent host writes
-      - node_modules:/workspace/frontend/node_modules
+      - node_modules:/workspace/node_modules
     networks:
       - devnet
     # Uncomment below and add the ports you want.
