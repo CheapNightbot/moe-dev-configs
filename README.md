@@ -18,7 +18,7 @@ You can use in following ways (choose the one you like?). For example, if you wa
 - Reference the pre-built template image inside your `.devcontainer.json` file:
   - ```json
     {
-      "image": "ghcr.io/CheapNightbot/moe-dev-configs/node:latest"
+      "image": "ghcr.io/cheapnightbot/moe-dev-configs/node:latest"
     }
     ```
 
