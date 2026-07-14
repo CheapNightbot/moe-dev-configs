@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    hostname: moe-dev
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    volumes:
+      # Mount project code
+      - ..:/workspace:cached,z
+      # Overlay a named volume on `.venv` to prevent host writes
+      - python_venv:/workspace/.venv
+    networks:
+      - devnet
+    # Uncomment below and add the ports you want.
+    # ports:
+    #   - "8000:8000"
+
+networks:
+  devnet:
+    driver: bridge
+
+volumes:
+  python_venv:

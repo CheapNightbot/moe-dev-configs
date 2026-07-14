@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    hostname: moe-dev
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    volumes:
+      # Mount project code
+      - ..:/workspace:cached,z
+      # Overlay a named volume on `node_modules` & `.venv` to prevent host writes
+      - node_modules:/workspace/frontend/node_modules
+      - python_venv:/workspace/backend/.venv
+    networks:
+      - devnet
+    ports:
+      - "4321:4321"     # Vite dev server
+      - "5000:5000"     # Flask dev server
+      - "8000:8000"     # Fastapi dev server
+    environment:
+      PNPM_HOME: "/home/moe/.local/share/pnpm"
+
+networks:
+  devnet:
+    driver: bridge
+
+volumes:
+  node_modules:
+  python_venv:

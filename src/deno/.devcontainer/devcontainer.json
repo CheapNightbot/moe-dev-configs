@@ -1,0 +1,31 @@
+{
+    "name": "Monorepo (uv + pnpm)",
+    "dockerComposeFile": "compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "moe",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "dev.containers.dockerCredentialHelper": false,
+                "dev.containers.copyGitConfig": false,
+                "remote.containers.defaultAgentForwarding": false,
+                "remote.SSH.forwardAgent": false
+            },
+            // Search extension in the extension tab, either right click and select
+            // "Add to devcontainer.json" or select "Copy Extension ID" and pase here ~
+            "extensions": [
+                "astro-build.astro-vscode",
+                "bradlc.vscode-tailwindcss",
+                "denoland.vscode-deno",
+                "svelte.svelte-vscode"
+            ]
+        }
+    },
+    "remoteEnv": {
+        "SSH_AUTH_SOCK": "",
+        "GPG_AGENT_INFO": "",
+        "BROWSER": ""
+    }
+}

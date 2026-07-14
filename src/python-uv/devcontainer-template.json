@@ -1,0 +1,8 @@
+{
+    "id": "python-uv",
+    "version": "1.0.0",
+    "name": "Python uv Development Environment",
+    "description": "A Python container using uv with virtual environment isolation and security hardening.",
+    "publisher": "ポテト ^. .^₎ฅ",
+    "licenseURL": "https://github.com/CheapNightbot/moe-dev-configs/blob/main/LICENSE"
+}
