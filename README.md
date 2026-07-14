@@ -5,6 +5,7 @@ A collection of devcontainer configurations for different projects. I use and te
 ## What's inside?
 
 - **deno** - For Deno projects
+- **node** - For Node.js projects (with pnpm)
 - **python-uv** - For Python projects using uv
 - **monorepo-uv-pnpm** - For projects with both Python (uv) and Node.js (pnpm)
 
