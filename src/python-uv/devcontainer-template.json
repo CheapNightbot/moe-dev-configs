@@ -1,6 +1,6 @@
 {
     "id": "python-uv",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "Python uv Development Environment",
     "description": "A Python container using uv with virtual environment isolation and security hardening.",
     "publisher": "ポテト ^. .^₎ฅ",
