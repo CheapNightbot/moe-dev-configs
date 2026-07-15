@@ -1,6 +1,6 @@
 {
     "id": "deno",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "name": "Deno Development Environment",
     "description": "A secure Deno container with non-root user and isolated filesystem.",
     "publisher": "ポテト ^. .^₎ฅ",

@@ -1,6 +1,6 @@
 {
     "id": "monorepo-uv-pnpm",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "name": "Monorepo (Python uv + Node.js pnpm)",
     "description": "A monorepo container with both Python (uv) and Node.js (pnpm) with isolated dependencies.",
     "publisher": "ポテト ^. .^₎ฅ",

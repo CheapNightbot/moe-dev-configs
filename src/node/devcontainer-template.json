@@ -1,6 +1,6 @@
 {
     "id": "node",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "name": "Node.js Development Environment",
     "description": "A secure Node.js container with non-root user and isolated filesystem.",
     "publisher": "ポテト ^. .^₎ฅ",
