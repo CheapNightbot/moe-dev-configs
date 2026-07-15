@@ -11,20 +11,35 @@ A collection of devcontainer configurations for different projects. I use and te
 
 ## How to use?
 
-You can use in following ways (choose the one you like?). For example, if you want to use [**node**](src/node) devcontainer template:
+You can use these templates in two ways (choose the one you like!). For example, if you want to use the **monorepo-uv-pnpm** template:
 
-- Clone the repo and copy-paste the `.devcontainer` directory from the `src/node` to your project root.
-- Create `.devcontainer` directory at your project root. Create `Dockerfile`, `compose.yml` and `devcontainer.json` inside that `.devcontainer` directory, and copy-paste contents of the files from `src/node/.devcontainer`.
-- Reference the pre-built template image inside your `.devcontainer.json` file:
-  - ```json
-    {
-      "image": "ghcr.io/cheapnightbot/moe-dev-configs/node:latest"
-    }
-    ```
+### Method 1: Pre-built Image (Recommended) ~
 
-Then make sure you have [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed in VSCode and press `F1` to open Command Palette and run `Dev Containers: Reopn in Container` command.
+Add the following to your project's `.devcontainer.json` OR `.devcontainer/devcontainer.json`:
 
-> Me think you can also use in GitHub Codespaces, but I did not try it ~ 
+```json
+{
+  "image": "ghcr.io/cheapnightbot/moe-dev-configs/monorepo-uv-pnpm:latest"
+}
+```
+
+Make sure you have [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed in VS Code, then press `F1` to open Command Palette and run `Dev Containers: Reopen in Container`.
+
+### Method 2: Manual Copy ~
+
+1. Copy the `.devcontainer` folder from the template you want (e.g. `src/monorepo-uv-pnpm/.devcontainer`) to the root of your project.
+2. Make sure you have [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed in VS Code.
+3. Press `F1` to open Command Palette and run `Dev Containers: Reopen in Container`.
+
+Alternatively, you can use the [Dev Container CLI](https://github.com/devcontainers/cli) to apply a template:
+
+```bash
+devcontainer templates apply \
+  --template-id ghcr.io/cheapnightbot/moe-dev-configs/monorepo-uv-pnpm \
+  --workspace-folder /path/to/your/project
+```
+
+> Me think you can also use in GitHub Codespaces, but I did not try it ~
 
 ## Important Notes
 
