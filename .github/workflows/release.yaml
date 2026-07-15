@@ -1,39 +1,106 @@
-# Source: https://github.com/devcontainers/template-starter/blob/main/.github/workflows/release.yaml
+name: "Release Dev Container Templates/Images & Generate Documentation"
 
-name: "Release Dev Container Templates & Generate Documentation"
 on:
   workflow_dispatch:
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_OWNER: ${{ github.repository_owner | lower }}
+
 jobs:
-  deploy:
+  # ============================================================
+  # Build and Push Container Images for Each Template
+  # ============================================================
+  build-images:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        template: [deno, monorepo-uv-pnpm, node, python-uv]  # Add/remove templates here
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/moe-dev-configs/${{ matrix.template }}
+          tags: |
+            type=raw,value=latest,priority=100
+            type=sha,prefix=,format=short
+            type=semver,pattern={{version}}
+
+      - name: Build and push container image
+        uses: docker/build-push-action@v5
+        with:
+          context: src/${{ matrix.template }}/.devcontainer
+          file: src/${{ matrix.template }}/.devcontainer/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ============================================================
+  # Publish Dev Container Templates (existing flow)
+  # ============================================================
+  deploy-templates:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: write
       pull-requests: write
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: "Publish Templates"
+    needs: build-images  # Wait for images to be built first
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Publish Dev Container Templates"
         uses: devcontainers/action@v1
         with:
           publish-templates: "true"
           base-path-to-templates: "./src"
           generate-docs: "true"
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ============================================================
+  # Create PR for Documentation Updates
+  # ============================================================
+  create-doc-pr:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: [build-images, deploy-templates]
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Create PR for Documentation
-        id: push_image_info
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
           echo "Start."
 
-          # Configure git and Push updates
+          # Configure git
           git config --global user.email github-actions[bot]@users.noreply.github.com
           git config --global user.name github-actions[bot]
           git config pull.rebase false
@@ -49,6 +116,5 @@ jobs:
           # Push
           if [ "$NO_UPDATES" != "true" ] ; then
               git push origin "$branch"
-              gh pr create --title "$message" --body "$message"
+              gh pr create --title "$message" --body "$message" --base main
           fi
-
