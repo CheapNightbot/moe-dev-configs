@@ -31,14 +31,6 @@ Make sure you have [Dev Containers](https://marketplace.visualstudio.com/items?i
 2. Make sure you have [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed in VS Code.
 3. Press `F1` to open Command Palette and run `Dev Containers: Reopen in Container`.
 
-Alternatively, you can use the [Dev Container CLI](https://github.com/devcontainers/cli) to apply a template:
-
-```bash
-devcontainer templates apply \
-  --template-id ghcr.io/cheapnightbot/moe-dev-configs/monorepo-uv-pnpm \
-  --workspace-folder /path/to/your/project
-```
-
 > Me think you can also use in GitHub Codespaces, but I did not try it ~
 
 ## Important Notes
