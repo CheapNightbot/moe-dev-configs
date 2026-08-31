@@ -18,6 +18,8 @@ services:
     # Uncomment below and add the ports you want.
     # ports:
     #   - "4321:4321"
+    environment:
+      DENO_DIR: "/home/moe/.cache/deno"
 
 networks:
   devnet:
